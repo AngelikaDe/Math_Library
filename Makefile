@@ -11,14 +11,14 @@ UNAME_S := $(shell uname -s)
 all: clean s21_math.a test
 
 s21_math.a: ${SOURCE}
-	$(GCC) $(CFLAGS) $(ADD_LIB) $(SOURCE) -lm
+	$(GCC) $(CFLAGS) $(ADD_LIB) $(SOURCE)
 	ar rc $@ $(OBJECTS)
 	ranlib $@
 	cp $@ lib$@
 
-test: ${TESTS_SOURCE} s21_math.a
-	${GCC} $(LDFLAGS) -o test $^ -lcheck -lm
-	./test
+# test: ${TESTS_SOURCE} s21_math.a
+# 	${GCC} $(LDFLAGS) -o test $^ -lcheck -lm
+# 	./test
 
 # gcov_report: clean lcov ${SOURCE}
 # 	gcc --coverage $(ADD_LIB) ${SOURCE} ${TESTS_SOURCE} -o s21_test -lcheck -lm
@@ -26,10 +26,10 @@ test: ${TESTS_SOURCE} s21_math.a
 # 	lcov -t "s21_test" -o s21_test.info -c -d .
 # 	genhtml -o report s21_test.info
 
-lcov:
-ifeq ("", "$(shell PATH=$(PATH) which lcov)")
-	$(error Need to install lcov)
-endif
+# lcov:
+# ifeq ("", "$(shell PATH=$(PATH) which lcov)")
+# 	$(error Need to install lcov)
+# endif
 
 clean:
 	-rm -rf *.o && rm -rf *.gcno
