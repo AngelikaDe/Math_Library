@@ -36,7 +36,7 @@ long double s21_pow(double base, double exp);
 long double s21_sin(double x);
 long double s21_sqrt(double x);
 long double s21_tan(double x);
-double s21_factorial(long long int x);
+double s21_factorial(long long int x);  // GET RID OF THIS BITCH
 long double s21_agm(double x, double y);
 
 #endif
