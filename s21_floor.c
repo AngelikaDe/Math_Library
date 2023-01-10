@@ -1,4 +1,5 @@
 #include "s21_math.h"
+
 long double s21_floor(double x) {
   int count = 0;
   double y = 0;

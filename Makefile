@@ -4,7 +4,7 @@ LDFLAGS = -O2 -Wall -Werror -Wextra -std=c11
 SOURCE = $(wildcard s21_*.c)
 HEADER = $(wildcard s21_*.h)
 OBJECTS = $(patsubst %.c,%.o, ${SOURCE})
-# TESTS_SOURCE = tests_1.c
+TESTS_SOURCE = s21_math_tests.c
 TESTS_OBJECTS = $(patsubst %.c,%.o, ${TESTS_SOURCE})
 UNAME_S := $(shell uname -s)
 
@@ -16,20 +16,16 @@ s21_math.a: ${SOURCE}
 	ranlib $@
 	cp $@ lib$@
 
-# test: ${TESTS_SOURCE} s21_math.a
-# 	${GCC} $(LDFLAGS) -o test $^ -lcheck -lm
-# 	./test
+test: ${TESTS_SOURCE} s21_math.a
+	${GCC} $(LDFLAGS) -o test $^ -lcheck -lm
+	./test
 
-# gcov_report: clean lcov ${SOURCE}
-# 	gcc --coverage $(ADD_LIB) ${SOURCE} ${TESTS_SOURCE} -o s21_test -lcheck -lm
-# 	./s21_test
-# 	lcov -t "s21_test" -o s21_test.info -c -d .
-# 	genhtml -o report s21_test.info
-
-# lcov:
-# ifeq ("", "$(shell PATH=$(PATH) which lcov)")
-# 	$(error Need to install lcov)
-# endif
+gcov_report: s21_math.a 
+	gcc --coverage $(ADD_LIB) ${SOURCE} ${TESTS_SOURCE} -o gcov_test -lcheck -lm -lpthread
+	./gcov_test
+	lcov -t "gcov_test" -o gcov_test.info --no-external -c -d .
+	genhtml -o report gcov_test.info
+	#  open ./report/gcov_test.html
 
 clean:
 	-rm -rf *.o && rm -rf *.gcno
