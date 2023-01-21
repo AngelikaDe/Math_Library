@@ -2,21 +2,22 @@
 #include <math.h>
 
 long double s21_exp(double x) {
-  long double result = 0;
-  long double n;
-  int i = 0;
+  long double result = 1;
+  long double n = 1;
+  int i = 1;
+
   if (isnan(x)) {
     result = s21_NAN;
-  } 
+  }
   if (isinf(x)) {
-    if (x < 0){
-        result = 0;
+    if (x < 0) {
+      result = 0;
     } else {
-        result = s21_INFINITY;
+      result = s21_INFINITY;
     }
   } else {
     do {
-      n = pow(x, i) / s21_factorial(i);
+      n *= x / i;
       result += n;
       i++;
     } while (n > 1e-16);
