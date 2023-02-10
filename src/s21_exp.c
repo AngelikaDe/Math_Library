@@ -1,5 +1,4 @@
 #include "s21_math.h"
-#include <math.h>
 
 long double s21_exp(double x) {
   long double result = 1;

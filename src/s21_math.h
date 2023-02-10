@@ -1,6 +1,5 @@
 #ifndef SRC_S21_MATH_H_
 #define SRC_S21_MATH_H_
-#include <math.h>
 #define s21_eps 1e-16
 #define s21_PI 3.14159265358979323846
 #define s21_PI_2 1.57079632679489661923132169163975144
