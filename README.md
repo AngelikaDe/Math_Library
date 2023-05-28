@@ -23,7 +23,7 @@ Version of the standard math.h library in the C programming language
 | 15 | `long double tan(double x)` | computes tangent |  
 
 
-Notes:
+### Notes:
 * The total verifiable accuracy is 16 significant digits
 * Full coverage of library functions code with unit-tests with the Check library 
 * Unit tests cover 100% of each function (checked using gcov)
