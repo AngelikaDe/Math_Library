@@ -1,4 +1,5 @@
 #include "s21_math.h"
+
 long double s21_tan(double x) {
   long double res = 0;
   long double n = 1;

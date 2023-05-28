@@ -16,16 +16,17 @@ long double s21_atan(double x) {
         y *= x * x;
         i += 2;
       } while (s21_fabs(n) > s21_eps);
-    }
-    if (x > 1) {
+    } else if (x > 1) {
       res = s21_PI_2 - s21_atan(1 / x);
-    }
-    if (x < -1) {
+    } else if (x < -1) {
       res = -s21_PI_2 - s21_atan(1 / x);
-    }
-    if (x == 1) {
+    } else if (x == 1) {
       res = s21_PI / 4;
+    } else if (x == -1) {
+      res = -s21_PI / 4;
     }
+  } else {
+    res = s21_NAN;
   }
   return res;
 }

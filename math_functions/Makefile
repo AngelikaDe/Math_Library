@@ -17,18 +17,11 @@ s21_math.a: ${SOURCE}
 	cp $@ lib$@
 
 test: ${TESTS_SOURCE} s21_math.a
-	${GCC} $(LDFLAGS) -o test $^ -lcheck -lm
+	${GCC} $(LDFLAGS) -o test $^ -lcheck -lm -lpthread
 	./test
 
-# gcov_report: s21_math.a 
-# 	gcc --coverage $(ADD_LIB) ${SOURCE} ${TESTS_SOURCE} -o gcov_test -lcheck -lm -lpthread
-# 	# ./gcov_test
-# 	# lcov -t "gcov_test" -o gcov_test.info --no-external -c -d .
-# 	# genhtml -o report gcov_test.info
-# 	# open ./report/gcov_test.html
-
 gcov_report: clean lcov ${SOURCE}
-	gcc --coverage ${SOURCE} tests.c -o s21_test -lcheck
+	gcc --coverage ${SOURCE} tests.c -o s21_test -lcheck -lm -lpthread
 	./s21_test
 	lcov -t "s21_test" -o s21_test.info -c -d .
 	genhtml -o report s21_test.info
@@ -38,8 +31,6 @@ lcov:
 ifeq ("", "$(shell PATH=$(PATH) which lcov)")
 	$(error Need to install lcov)
 endif
-
-
 
 clean:
 	-rm -rf *.o && rm -rf *.gcno
